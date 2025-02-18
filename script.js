@@ -1,37 +1,34 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const inputs = document.querySelectorAll('input[type="text"]');
-  const weightInput = inputs[0];
-  const heightInput = inputs[1];
+document.addEventListener("DOMContentLoaded", function () {
+  const weightInput = document.getElementById("weight");
+  const heightInput = document.getElementById("height");
   const calculateBtn = document.querySelector("button");
   const resultDiv = document.querySelector(".result");
+  const gradeDiv = document.querySelector(".grade");
 
-  const calculateBMI = () => {
+  calculateBtn.addEventListener("click", function () {
     const weight = parseFloat(weightInput.value);
-    const heightCm = parseFloat(heightInput.value);
+    const height = parseFloat(heightInput.value) / 100; // Convert cm to meters
 
-    if (isNaN(weight) || isNaN(heightCm) || weight <= 0 || heightCm <= 0) {
-      resultDiv.textContent =
-        "Please enter valid positive numbers for both weight and height.";
+    if (isNaN(weight) || isNaN(height) || height <= 0 || weight <= 0) {
+      resultDiv.textContent = "Please enter valid values";
+      resultDiv.style.display = "block";
+      gradeDiv.style.display = "none";
       return;
     }
 
-    const heightM = heightCm / 100;
+    const bmi = (weight / (height * height)).toFixed(2);
+    let category = "";
 
-    const bmi = weight / (heightM * heightM);
-
-    const bmiRounded = bmi.toFixed(2);
-
-    let gradeMessage = "";
     if (bmi < 18.5) {
-      gradeMessage = "You are underweight.";
-    } else if (bmi < 25) {
-      gradeMessage = "You have a healthy weight.";
+      category = "Underweight";
+    } else if (bmi >= 18.5 && bmi <= 24.9) {
+      category = "Healthy weight";
     } else {
-      gradeMessage = "You are overweight.";
+      category = "Overweight";
     }
 
-    resultDiv.textContent = `Your BMI is ${bmiRounded}. ${gradeMessage}`;
-  };
-
-  calculateBtn.addEventListener("click", calculateBMI);
+    resultDiv.innerHTML = `Your BMI is <strong>${bmi}</strong> (${category})`;
+    resultDiv.style.display = "block";
+    gradeDiv.style.display = "flex";
+  });
 });
