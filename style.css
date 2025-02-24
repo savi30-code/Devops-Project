@@ -10,7 +10,7 @@ body {
 }
 
 a {
-  color: #B7B1F2;
+  color: #b7b1f2;
 }
 .container {
   position: relative;
@@ -81,7 +81,6 @@ h2 {
   font-size: 30px;
 }
 
-/* From Uiverse.io by barisdogansutcu */
 button {
   padding: 17px 40px;
   border-radius: 50px;
