@@ -9,6 +9,9 @@ body {
   color: #fac67a;
 }
 
+a {
+  color: #B7B1F2;
+}
 .container {
   position: relative;
   top: 50px;
